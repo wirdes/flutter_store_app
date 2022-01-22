@@ -14,7 +14,9 @@ class MyTheme {
 
   ThemeData get dartThemeData => ThemeData(
       primarySwatch: appMaterialPrimary,
-      brightness: Brightness.dark,
+      cardColor: Colors.black,
+      canvasColor: darkCreamColor,
+      splashColor: lightBluishColor,
       appBarTheme: const AppBarTheme(
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),

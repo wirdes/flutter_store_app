@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(136, 14, 79, .1),
@@ -22,4 +23,6 @@ const appSecondryColor = Color(0xFF5C8DF7);
 const appSecondryColorLight = Color(0xFF94bdff);
 
 const creamColor = Color(0xfff5f5f5);
+const darkCreamColor = Vx.gray900;
 const darkBluishColor = Color(0xff403b58);
+const lightBluishColor = Vx.purple400;

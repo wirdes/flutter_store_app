@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/app_colors.dart';
 import 'package:flutter_store_app/components/drawer.dart';
 import 'package:flutter_store_app/components/item_widget.dart';
-import 'package:flutter_store_app/models/product.dart';
+import 'package:flutter_store_app/pages/product/product_page.dart';
 import 'package:flutter_store_app/services/api_service.dart';
+import 'package:flutter_store_app/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.cartRoute);
+        },
+        backgroundColor: appPrimaryColor,
+        child: const Icon(CupertinoIcons.cart),
+      ),
       backgroundColor: creamColor,
       body: SafeArea(
         child: Container(
@@ -46,7 +54,6 @@ class CatalogList extends StatefulWidget {
 class _CatalogListState extends State<CatalogList> {
   @override
   Widget build(BuildContext context) {
-    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
     return Padding(
         padding: const EdgeInsets.all(16.0),
         child: FutureBuilder(
@@ -57,8 +64,16 @@ class _CatalogListState extends State<CatalogList> {
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        return ItemWidget(
-                          item: snapshot.data![index],
+                        return InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (contex) => ProductDetailsPage(
+                                        item: snapshot.data![index],
+                                      ))),
+                          child: ItemWidget(
+                            item: snapshot.data![index],
+                          ),
                         );
                       },
                     )
