@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter_store_app/config.dart';
 import 'package:flutter_store_app/models/product.dart';
 import 'package:http/http.dart' as http;
@@ -17,10 +16,8 @@ class APIService {
       headers: requestHeaders,
     );
     if (response.statusCode == 200) {
-      print(response);
       return productFromJson(response.body);
     } else {
-      print(response);
       return [];
     }
   }

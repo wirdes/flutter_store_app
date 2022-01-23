@@ -3,7 +3,7 @@ import 'package:flutter_store_app/pages/login/components/background.dart';
 import 'package:flutter_store_app/pages/login/components/rounded_button.dart';
 import 'package:flutter_store_app/pages/login/components/rounded_input_field.dart';
 import 'package:flutter_store_app/utils/routes.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 import 'package:flutter_store_app/app_colors.dart';
 
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 //   isAPIcallProcess = true;
                 // });
                 Navigator.pushNamed(context, AppRoutes.homeRoute);
-                // _showMyDialog("Store App", "Giriş Yapıldı");
+                _showMyDialog("Store App", "Giriş Yapıldı");
               },
             ),
             SizedBox(height: size.height * 0.03),

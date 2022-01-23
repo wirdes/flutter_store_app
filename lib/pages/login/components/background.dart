@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/app_colors.dart';
-import 'package:flutter_svg/svg.dart';
+//import 'package:flutter_svg/svg.dart';
 
 class Background extends StatelessWidget {
   final Widget child;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/app_colors.dart';
 import 'package:flutter_store_app/components/theme.dart';
 import 'package:flutter_store_app/pages/cart/cart_page.dart';
 import 'package:flutter_store_app/pages/home/home_page.dart';
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => const LoginPage(),
+        "/": (context) => const HomePage(),
         AppRoutes.homeRoute: (context) => const HomePage(),
         AppRoutes.loginRoute: (context) => const LoginPage(),
         AppRoutes.cartRoute: (context) => const CartPage()
