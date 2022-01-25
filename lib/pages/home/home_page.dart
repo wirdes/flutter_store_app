@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_app/app_colors.dart';
 import 'package:flutter_store_app/components/drawer.dart';
 import 'package:flutter_store_app/components/item_widget.dart';
+import 'package:flutter_store_app/core/store/store.dart';
+import 'package:flutter_store_app/pages/home/components/categories.dart';
 import 'package:flutter_store_app/pages/product/product_page.dart';
 import 'package:flutter_store_app/services/api_service.dart';
 import 'package:flutter_store_app/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  MyStore store = VxState.store;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +28,18 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, AppRoutes.cartRoute);
         },
         backgroundColor: appPrimaryColor,
-        child: const Icon(CupertinoIcons.cart),
+        child: Stack(children: <Widget>[
+          const Icon(CupertinoIcons.cart),
+          Positioned(
+            top: -5.0,
+            right: 0.0,
+            child: Container(
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: Colors.red),
+              child: store.cart.length.text.make(),
+            ),
+          )
+        ]),
       ),
       backgroundColor: creamColor,
       body: SafeArea(
@@ -33,7 +48,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CatalogHeader(),
+              CatalogHeader(),
+              const Categories(),
               const CatalogList().expand(),
             ],
           ),
@@ -85,17 +101,22 @@ class _CatalogListState extends State<CatalogList> {
 }
 
 class CatalogHeader extends StatelessWidget {
-  const CatalogHeader({
+  CatalogHeader({
     Key? key,
   }) : super(key: key);
-
+  final MyStore store = VxState.store;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "StoreApp".text.xl6.bold.color(appPrimaryColor).make(),
-        "Trending Prodcut".text.xl.make(),
+        ("StoreApp" + store.cart.length.toString())
+            .text
+            .xl6
+            .bold
+            .color(appPrimaryColor)
+            .make(),
+        "Trending Product".text.xl.make(),
       ],
     );
   }

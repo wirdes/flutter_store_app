@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/app_colors.dart';
+import 'package:flutter_store_app/core/store/store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
-
+  CartPage({Key? key}) : super(key: key);
+  final MyStore store = VxState.store;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +16,9 @@ class CartPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const _CartList().p32().expand(),
+          _CartList().p32().expand(),
           const Divider(),
-          const _CartTotal(),
+          _CartTotal(),
         ],
       ),
     );
@@ -25,8 +26,7 @@ class CartPage extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  const _CartTotal({Key? key}) : super(key: key);
-
+  final MyStore store = VxState.store;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -34,7 +34,13 @@ class _CartTotal extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            "999 ₺".text.color(appPrimaryColor).bold.xl5.make().p16(),
+            (store.totalPrice.toString() + " ₺")
+                .text
+                .color(appPrimaryColor)
+                .bold
+                .xl5
+                .make()
+                .p16(),
             30.widthBox,
             ElevatedButton(
                     onPressed: () {
@@ -49,18 +55,14 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({Key? key}) : super(key: key);
+class _CartList extends StatelessWidget {
+  _CartList({Key? key}) : super(key: key);
+  MyStore store = VxState.store;
 
-  @override
-  State<_CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: store.cart.length,
       itemBuilder: (context, index) => ListTile(
         leading: const Icon(
           Icons.done,
@@ -72,7 +74,7 @@ class _CartListState extends State<_CartList> {
               Icons.remove_circle_outline,
               color: Colors.red,
             )),
-        title: ("item " + index.toString()).text.make(),
+        title: (store.cart[index].title).text.maxLines(1).make(),
       ),
     );
   }

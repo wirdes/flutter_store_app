@@ -5,5 +5,4 @@ class Config {
   static const String productsOneof = "/products/";
   static const String categories = "/products/categories";
   static const String categoriesOneof = "/products/category/";
-  static const String getPepWallet = "/v1/wallet";
 }

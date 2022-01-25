@@ -26,3 +26,4 @@ const creamColor = Color(0xfff5f5f5);
 const darkCreamColor = Vx.gray900;
 const darkBluishColor = Color(0xff403b58);
 const lightBluishColor = Vx.purple400;
+const kDefaultPaddin = 20.0;

@@ -21,4 +21,21 @@ class APIService {
       return [];
     }
   }
+
+  static Future<List> getCategories() async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    var url = Uri.http(Config.apiURL, Config.products);
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+    if (response.statusCode == 200) {
+      return productFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
 }

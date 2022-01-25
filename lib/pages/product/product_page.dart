@@ -12,30 +12,33 @@ class ProductDetailsPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Container(
         color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            (item.price.toString() + " ₺")
-                .text
-                .xl3
-                .color(appPrimaryColor)
-                .bold
-                .make(),
-            ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all(const StadiumBorder())),
-                    child: "Add".text.xl2.make())
-                .w40(context)
-                .h4(context)
-          ],
-        ).pOnly(right: 8).h15(context).p24(),
+        child: Container(
+          color: creamColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              (item.price.toString() + " ₺")
+                  .text
+                  .xl3
+                  .color(appPrimaryColor)
+                  .bold
+                  .make(),
+              ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(const StadiumBorder())),
+                      child: "Add".text.xl2.make())
+                  .w40(context)
+                  .h4(context)
+            ],
+          ).pOnly(right: 8).h15(context).p24(),
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: creamColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -48,7 +51,7 @@ class ProductDetailsPage extends StatelessWidget {
               edge: VxEdge.TOP,
               arcType: VxArcType.CONVEY,
               child: Container(
-                color: Colors.white,
+                color: creamColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -60,7 +63,7 @@ class ProductDetailsPage extends StatelessWidget {
                         .color(appPrimaryColor)
                         .make()
                         .p32(),
-                    item.description.text.maxLines(5).make(),
+                    item.description.text.maxLines(4).make(),
                     10.heightBox,
                   ],
                 ).p32(),
