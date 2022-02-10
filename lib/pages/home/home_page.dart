@@ -4,6 +4,7 @@ import 'package:flutter_store_app/app_colors.dart';
 import 'package:flutter_store_app/components/drawer.dart';
 import 'package:flutter_store_app/components/item_widget.dart';
 import 'package:flutter_store_app/core/store/store.dart';
+import 'package:flutter_store_app/models/cart.dart';
 import 'package:flutter_store_app/pages/home/components/categories.dart';
 import 'package:flutter_store_app/pages/product/product_page.dart';
 import 'package:flutter_store_app/services/api_service.dart';
@@ -22,25 +23,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.cartRoute);
-        },
-        backgroundColor: appPrimaryColor,
-        child: Stack(children: <Widget>[
-          const Icon(CupertinoIcons.cart),
-          Positioned(
-            top: -5.0,
-            right: 0.0,
-            child: Container(
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Colors.red),
-              child: store.cart.length.text.make(),
-            ),
-          )
-        ]),
-      ),
+      floatingActionButton: VxBuilder(
+          mutations: const {AddMutation},
+          builder: (context, _, _a) => FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.cartRoute);
+                },
+                backgroundColor: appPrimaryColor,
+                child: const Icon(CupertinoIcons.cart),
+              ).badge(
+                  color: Vx.red600,
+                  size: _cart.cart.items.isNotEmpty ? 25 : 0,
+                  count: _cart.cart.items.length,
+                  textStyle:
+                      const TextStyle(fontSize: 15, color: Colors.white))),
       backgroundColor: creamColor,
       body: SafeArea(
         child: Container(
@@ -110,12 +108,7 @@ class CatalogHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ("StoreApp" + store.cart.length.toString())
-            .text
-            .xl6
-            .bold
-            .color(appPrimaryColor)
-            .make(),
+        "StoreApp".text.xl6.bold.color(appPrimaryColor).make(),
         "Trending Product".text.xl.make(),
       ],
     );

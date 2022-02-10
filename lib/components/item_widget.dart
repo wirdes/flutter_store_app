@@ -3,8 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/app_colors.dart';
-import 'package:flutter_store_app/core/store/mutations.dart';
 import 'package:flutter_store_app/core/store/store.dart';
+import 'package:flutter_store_app/models/cart.dart';
 import 'package:flutter_store_app/models/product.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -44,14 +44,13 @@ class _ItemWidgetState extends State<ItemWidget> {
                 (widget.item.price.toString() + " ₺").text.bold.make(),
                 ElevatedButton(
                     onPressed: () {
-                      AddToCart(widget.item);
-                      setState(() {
-                        isPresed = !isPresed;
-                      });
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //     content: isPresed
-                      //         ? "Product Added from Cart".text.make()
-                      //         : "Product Remove from Cart".text.make()));
+                      print(widget.item.id);
+                      if (!isPresed) {
+                        AddMutation(widget.item);
+                        setState(() {
+                          isPresed = true;
+                        });
+                      }
                     },
                     style: ButtonStyle(
                         shape:

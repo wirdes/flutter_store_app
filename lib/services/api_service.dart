@@ -16,6 +16,7 @@ class APIService {
       headers: requestHeaders,
     );
     if (response.statusCode == 200) {
+      CatalogModel.items = productFromJson(response.body);
       return productFromJson(response.body);
     } else {
       return [];
@@ -33,6 +34,7 @@ class APIService {
       headers: requestHeaders,
     );
     if (response.statusCode == 200) {
+      print(CatalogModel.items);
       return productFromJson(response.body);
     } else {
       return [];
